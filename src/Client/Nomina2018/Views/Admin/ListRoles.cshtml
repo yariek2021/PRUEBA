@@ -1,0 +1,75 @@
+﻿@model IEnumerable<RoleDto>
+
+@{
+    ViewBag.Title = "Roles";
+    ViewBag.menu_title = "Administrar";
+    ViewBag.sub_menu_title = "Roles";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+
+            @if (Model.Any())
+            {
+                    <h5 class="card-title">
+                        <a class="btn btn-primary btn-sm" style="width:auto" asp-action="CreateRole"
+                           asp-controller="admin">+Agregar Role</a>
+
+                    </h5>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Role</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var role in Model)
+                            {
+                                <tr>
+                                    <td> @role.Id </td>
+                                    <td> @role.Name </td>
+                                    <td>
+                                        @*@if ((await authorizationService.AuthorizeAsync(User, "CrearRolePolicy")).Succeeded)
+                                    {
+                                    <a asp-controller="Admin" asp-action="EditRole"
+                                       asp-route-id="@role.Id" class="btn btn-primary btn-sm">
+                                        Editar
+                                        <i class="mdi mdi-pencil btn-icon-append"></i>
+                                    </a>
+                                    }*@
+                                        <a asp-controller="Admin" asp-action="EditRole"
+                                           asp-route-id="@role.Id" class="btn btn-primary btn-sm">
+                                            Editar
+                                            <i class="mdi mdi-pencil btn-icon-append"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+         
+            }
+            else
+            {
+                <div class="card">
+                    <div class="card-header">
+                        No se han creado roles.
+                    </div>
+                    @*<div class="card-body">
+
+                        <a class="btn btn-primary" style="width:auto"
+                           asp-controller="admin" asp-action="CreateRole">
+                            Crear Role
+                        </a>
+                    </div>*@
+                </div>
+            }
+
+
+
+
+
+    </div>
+</div>

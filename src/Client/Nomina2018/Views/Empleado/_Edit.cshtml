@@ -1,0 +1,85 @@
+﻿@model EmpleadoViewModel
+
+@{
+    ViewBag.Title = "Editar";
+    ViewBag.menu_title = "Nómina";
+    ViewBag.sub_menu_title = "Empleado";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit" asp-controller="Empleado" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label  class="control-label">ID</label>
+                <input asp-for="empleado.EmpleadoId" class="form-control" readonly required/>
+                <span asp-validation-for="empleado.EmpleadoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="empleado.Nombre" class="control-label"></label>
+                <input asp-for="empleado.Nombre" class="form-control" required/>
+                <span asp-validation-for="empleado.Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="empleado.ApellidoPaterno" class="control-label"></label>
+                <input asp-for="empleado.ApellidoPaterno" class="form-control" required/>
+                <span asp-validation-for="empleado.ApellidoPaterno" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="empleado.ApellidoMaterno" class="control-label"></label>
+                <input asp-for="empleado.ApellidoMaterno" class="form-control" required/>
+                <span asp-validation-for="empleado.ApellidoMaterno" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="empleado.FechaNacimiento" class="control-label"></label>
+                <input asp-for="empleado.FechaNacimiento" class="form-control" type="date" required/>
+                <span asp-validation-for="empleado.FechaNacimiento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="empleado.Direccion" class="control-label"></label>
+                <input asp-for="empleado.Direccion" class="form-control" required/>
+                <span asp-validation-for="empleado.Direccion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="empleado.Telefono" class="control-label"></label>
+                <input asp-for="empleado.Telefono" class="form-control" required/>
+                <span asp-validation-for="empleado.Telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="empleado.Email" class="control-label"></label>
+                <input asp-for="empleado.Email" class="form-control" type="email" required/>
+                <span asp-validation-for="empleado.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="empleado.NSS" class="control-label"></label>
+                <input asp-for="empleado.NSS" class="form-control" required/>
+                <span asp-validation-for="empleado.NSS" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label  class="control-label">Puesto</label>
+                <select asp-for="empleado.PuestoId"  class="form-control form-control-sm" asp-items="Model.Puestos.Select(x=> new SelectListItem { Value = x.Value.ToString(),Text = x.Text.ToString()})" required></select>
+                <span asp-validation-for="empleado.PuestoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="empleado.FechaIngreso" class="control-label"></label>
+                <input asp-for="empleado.FechaIngreso" class="form-control" type="date" required/>
+                <span asp-validation-for="empleado.FechaIngreso" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="empleado.FechaBaja" class="control-label"></label>
+                <input asp-for="empleado.FechaBaja" class="form-control" type="date" />
+                <span asp-validation-for="empleado.FechaBaja" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="empleado.Estatus" /> @Html.DisplayNameFor(model => model.empleado.Estatus)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar cambios" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+

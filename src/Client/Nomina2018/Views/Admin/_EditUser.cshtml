@@ -1,0 +1,136 @@
+﻿@model EditUserViewModel
+
+@{
+    ViewBag.Title = "Editar usuario";
+    ViewBag.menu_title = "Administrar";
+    ViewBag.sub_menu_title = "Usuarios";
+}
+
+
+<div class="row"  id="EditUser" v-cloak>
+    <div class="col-lg-12">
+    
+            <div class="position-relative row form-group">
+                <label for="Id" class="col-sm-2 col-form-label">Id Colaborador</label>
+                <div class="col-sm-10">
+                    <input asp-for="Id" disabled class="form-control form-control-sm" >
+                </div>
+            </div>
+            <div class="position-relative row form-group">
+                <label for="UserName" class="col-sm-2 col-form-label">Nombre</label>
+                <div class="col-sm-10">
+                    <input asp-for="UserName" disabled class="form-control form-control-sm">
+                </div>
+            </div>
+
+            <div class="position-relative row form-group">
+                <label for="RoleId" class="col-sm-2 col-form-label">Role</label>
+                <div class="col-sm-10">
+                    <select asp-for="RoleId" v-model="selectedRoles" class="form-control form-control-sm" asp-items="Model.Roles.Select(x=> new SelectListItem { Value = x.Id.ToString(),Text = x.Name.ToString()})"></select>
+                </div>
+            </div>
+
+            <div class="position-relative row form-group">
+                <label  class="col-sm-2 col-form-label">&nbsp;</label>
+                <div class="col-sm-10">
+                    <div class="custom-checkbox custom-control">
+                        <input asp-for="Activo" id="Activo" class="custom-control-input" />
+                        <label class="custom-control-label" asp-for="Activo">
+                            Acceso
+                            <i class="input-helper"></i>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="position-relative row form-check">
+                    <div class="col-sm-10 offset-sm-2" style="padding-left: 0;display:flex;justify-content:flex-end;">
+                        <button type="button" v-on:click="save" v-bind:disabled="isDisabled" class="btn btn-success">Guardar</button>
+                    </div>
+                </div>
+                <div>
+                    <br />          
+                </div>
+    </div>
+</div>
+
+<script>
+
+            var app = new Vue({
+                el: '#EditUser',
+                data: { 
+                selectedRoles:@Html.Raw(Model.RoleId),
+                model: {
+                    Id: @Html.Raw(Model.Id),
+                    RoleId:  @Html.Raw(Model.RoleId),
+                    Activo: false  
+                    },
+                isDisabled:false
+                
+            },
+            created: function () {
+
+          
+            },
+            methods: {
+
+                save() {
+                    this.isDisabled = true;
+
+                    this.model.RoleId = this.selectedRoles
+                    this.model.Activo = $("#Activo").prop("checked");
+
+                    console.log(this.model)
+
+                    $.ajax({
+                        url: '@Url.Action("EditUser", "Admin")',
+                        type: "POST",
+                        data:  this.model,
+                success: data => {
+
+                    var datos = JSON.parse(data);
+
+                    this.isDisabled = false;
+
+                    ReloadTable();
+
+                    if (datos.Message != '') {
+
+                        Swal.fire(
+                            'Los datos han sido actualizados!',
+                            '',
+                            'success'
+                        )
+                    }
+
+                },
+                failure: function (data) {
+                    console.log(data.responseText);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Algo salió mal!',
+                        text: 'Contacta a tu administrador del Sistema'
+                        //footer: '<a href>Why do I have this issue?</a>'
+                    })
+                },
+                error: function (data) {
+                    console.log(data.responseText);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Algo salió mal!',
+                        text: 'Contacta a tu administrador del Sistema'
+                        //footer: '<a href>Why do I have this issue?</a>'
+                    })
+                },
+                })
+
+                }
+            }
+
+        })
+
+
+</script>

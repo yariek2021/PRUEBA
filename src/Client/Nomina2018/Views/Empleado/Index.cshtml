@@ -1,0 +1,154 @@
+﻿@{
+    ViewBag.Title = "Nómina";
+    ViewBag.menu_title = "Empleados";
+    ViewBag.sub_menu_title = "Lista";
+}
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+                <div class="page-title">
+                    <button type="button" class="btn btn-primary" onclick="CrearEmpleado()">+Agregar Empleado</button>
+                </div>
+            </div>
+        <div class="page-title-actions">
+
+            <div class="d-inline-block">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Departamentos</span>
+                    </div>
+                    <select name="Departamento" class="form-control column_filter" id="col4_filter">
+                        <option value="TODOS">TODOS</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<table class="table table-hover table-striped table-bordered dataTable dtr-inline display compact order-column" id="TableUsers" style="width:100%;">
+</table>
+
+@section Scripts {
+
+    <script>
+        $(function () {
+        var empleados = $('#TableUsers').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json",
+                    "decimal": ".",
+                    "thousands": ","
+                },
+                searching: true,
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Todo"]],
+                select: true,
+                "processing": true,
+                ajax: {
+                    url: '@Url.Action("DataListUsers", "Empleado")',
+                    type: "GET"
+                },
+                columns: [
+                    { title: "Id", data: 'EmpleadoId' },
+                    { title: "Nombre", data: 'Nombre' },
+                    { title: "Apellido Paterno", data: 'ApellidoPaterno' },
+                    { title: "Apellido Materno", data: 'ApellidoMaterno' },
+                    { title: "Departamento", data: 'Departamento', className: 'text-center' },
+                    { title: "Puesto", data: 'Puesto', className: 'text-center' },
+                    {
+                        title: "Estatus",
+                        className: 'text-center',
+                        align:'center',
+                        "render": function (data, type, full, meta) {
+                            if (full.Estatus) {
+                                return '<div class="custom-checkbox custom-control"><input type = "checkbox" checked disabled id = "exampleCustomCheckbox" class="custom-control-input" ><label class="custom-control-label" for="exampleCustomCheckbox"></label></div>';
+                            } else {
+                                return '<div class="custom-checkbox custom-control"><input type = "checkbox" disabled id = "exampleCustomCheckbox" class="custom-control-input" ><label class="custom-control-label" for="exampleCustomCheckbox"></label></div>';
+                            }
+                        }
+                    },
+                    {
+                    className: 'text-center',
+                        "render": function (data, type, full, meta) {
+
+                            return '<a class="btn btn-sm btn-primary" href="#" onclick="EditarUsuario(' + full.EmpleadoId + ')">Editar</a>';
+                        }
+                    }
+                ],
+                "initComplete": function (settings, json) {
+                    $.each(json.deptos, function (i, p) {
+                        $('#col4_filter').append($('<option></option>').val(p.DepartamentoId).html(p.Nombre));
+                    });
+                }
+            });
+
+            $('#col4_filter').on('change', function () {
+                var typeVal = $(this).find("option:selected").text();
+
+                if (typeVal != 'TODOS') {
+                    empleados.columns(4).search(typeVal).draw();
+                } else {
+                    empleados.search('').columns().search('').draw();
+                }
+            })
+
+        });
+
+        function EditarUsuario(EmpleadoId) {
+
+        var prm_url = '@Url.Action("Edit", "Empleado")';
+
+        $("#modal_contanier").html("");
+
+        $.ajax({
+            async: true,
+            url: prm_url,
+            data: { EmpleadoId: EmpleadoId },
+            type: 'GET',
+            dataType:"html",
+            success: function (response) {
+                console.log(response)
+                $("#modal_contanier").html(response);
+                var modal = $('#ObjModal');
+                modal.modal('show')
+                modal.find('.modal-title').text("Editar Empleado")
+
+            },
+                error: function (xhr, status, error) {
+                console.log("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
+            }
+        });
+        }
+
+       function CrearEmpleado() {
+
+        var prm_url = '@Url.Action("Create", "Empleado")';
+
+        $("#modal_contanier").html("");
+
+        $.ajax({
+            async: true,
+            url: prm_url,
+            type: 'GET',
+            dataType:"html",
+            success: function (response) {
+                $("#modal_contanier").html(response);
+                var modal = $('#ObjModal');
+                modal.modal('show')
+                modal.find('.modal-title').text("Agregar Empleado")
+
+            },
+                error: function (xhr, status, error) {
+                console.log("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
+            }
+        });
+
+        }
+
+        function ReloadTable() {
+            $('#TableUsers').DataTable().ajax.reload();
+        }
+
+    </script>
+}

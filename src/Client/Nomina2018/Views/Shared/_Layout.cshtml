@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <meta name="description" content="Nómina">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>@ViewData["Title"] - @ViewData["menu_title"]</title>
+    <link href="~/assets/css/base.css" rel="stylesheet" />
+    <link href="~/Styles.css" rel="stylesheet" />
+</head>
+<body>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="app-container fixed-header fixed-sidebar app-theme-gray body-tabs-line">
+            <partial name="_Header" />
+            <div class="app-main">
+                <partial name="_MenuLeft" />
+
+                <div class="app-main__outer">
+                    <div class="app-main__inner">
+
+                        @RenderBody()
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="app-drawer-overlay d-none animated fadeIn">
+
+        </div>
+    }
+    else
+    {
+        @RenderBody()
+
+    }
+
+    <partial name="_ModalContent" />
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/metismenu"></script>
+    <script src="~/assets/js/scripts-init/app.js"></script>
+    <script src="~/assets/js/scripts-init/demo.js"></script>
+    <script src="~/assets/js/vendors/charts/charts-sparklines.js"></script>
+    <script src="~/assets/js/scripts-init/charts/charts-sparklines.js"></script>
+    <script src="~/assets/js/vendors/form-components/clipboard.js"></script>
+    <script src="~/assets/js/scripts-init/form-components/clipboard.js"></script>
+    <script src="~/assets/js/vendors/form-components/datepicker.js"></script>
+    <script src="~/assets/js/vendors/form-components/moment.js"></script>
+    <script src="~/assets/js/vendors/form-components/moment-with-locales.js"></script>
+    <script src="~/assets/js/vendors/form-components/daterangepicker.js"></script>
+    <script src="~/assets/js/scripts-init/form-components/datepicker.js"></script>
+    <script src="~/assets/js/vendors/form-components/bootstrap-multiselect.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script src="~/assets/js/scripts-init/form-components/input-select.js"></script>
+    <script src="~/assets/js/vendors/form-components/form-validation.js"></script>
+    <script src="~/assets/js/scripts-init/form-components/form-validation.js"></script>
+    <script src="~/assets/js/vendors/form-components/form-wizard.js"></script>
+    <script src="~/assets/js/scripts-init/form-components/form-wizard.js"></script>
+    <script src="~/assets/js/vendors/form-components/input-mask.js"></script>
+    <script src="~/assets/js/scripts-init/form-components/input-mask.js"></script>
+    <script src="~/assets/js/vendors/form-components/wnumb.js"></script>
+    <script src="~/assets/js/vendors/form-components/range-slider.js"></script>
+    <script src="~/assets/js/scripts-init/form-components/range-slider.js"></script>
+    <script src="~/assets/js/vendors/form-components/textarea-autosize.js"></script>
+    <script src="~/assets/js/scripts-init/form-components/textarea-autosize.js"></script>
+    <script src="~/assets/js/vendors/form-components/toggle-switch.js"></script>
+    <script src="~/assets/js/vendors/blockui.js"></script>
+    <script src="~/assets/js/scripts-init/blockui.js"></script>
+
+    <script src="~/assets/js/vendors/ladda-loading.js"></script>
+    <script src="~/assets/js/vendors/spin.js"></script>
+    <script src="~/assets/js/scripts-init/ladda-loading.js"></script>
+
+    <script src="~/assets/js/vendors/rating.js"></script>
+    <script src="~/assets/js/scripts-init/rating.js"></script>
+
+    <script src="~/assets/js/vendors/scrollbar.js"></script>
+    <script src="~/assets/js/scripts-init/scrollbar.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" crossorigin="anonymous"></script>
+    <script src="~/assets/js/scripts-init/toastr.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="~/assets/js/scripts-init/sweet-alerts.js"></script>
+
+    <script src="~/assets/js/vendors/treeview.js"></script>
+    <script src="~/assets/js/scripts-init/treeview.js"></script>
+
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/datatables.net-bs4@1.10.19/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js" crossorigin="anonymous"></script>
+    <script src="~/assets/datatable/dataTables.editor.min.js"></script>
+
+    <script src="~/assets/js/vendors/tables.js"></script>
+    <script src="~/assets/js/scripts-init/tables.js"></script>
+
+    <environment include="Development">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </environment>
+
+    <environment exclude="development">
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

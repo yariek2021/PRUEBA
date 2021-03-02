@@ -1,0 +1,57 @@
+﻿@model Nomina2018.ViewModels.UserLoginViewModel
+@{
+    ViewData["Title"] = "Autenticación";
+}
+
+    <div class="app-container app-theme-white body-tabs-shadow">
+        <div class="app-container">
+            <div class="h-100  bg-animation">
+                <div class="d-flex h-100 justify-content-center align-items-center">
+                    <div class="mx-auto app-login-box col-md-8">
+  
+                        <div class="modal-dialog w-100 mx-auto">
+                            <div class="modal-content">
+                             <form method="post">
+                                 <div class="modal-body">
+                                     <div class="h5 modal-title text-center">
+                                         <h4 class="mt-2">  
+                                             Nómina 2018
+                                         </h4>
+                                     </div>
+                                     <div asp-validation-summary="All" class="text-danger"></div>
+
+                                     <div class="form-row">
+                                         <div class="col-md-12">
+                                             <div class="position-relative form-group">
+                                                 <input asp-for="UserName" class="form-control" placeholder="Usuario" />
+                                             </div>
+                                         </div>
+                                         <div class="col-md-12">
+                                             <div class="position-relative form-group">
+                                                 <input asp-for="Password" type="password" class="form-control" placeholder="Contraseña" />
+     
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="custom-checkbox custom-control">
+
+                                         <input asp-for="RememberMe" class="custom-control-input" />    
+                                         <label asp-for="RememberMe" class="custom-control-label">
+                                             Recordarme
+                                         </label>
+                                     </div>
+                                 </div>
+                                <div class="modal-footer clearfix">
+                                    <div class="float-right">
+                                        <button type="submit" class="btn btn-primary btn-lg">Iniciar Sesión</button>
+                                    </div>
+                                </div>
+                                </form>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    

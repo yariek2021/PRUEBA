@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Inicio";
+
+    //var test1 = 0;
+    //var test2 = 0;
+
+    //var test3 = test1 / test2;
+}
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+                <i class="pe-7s-date icon-gradient bg-heavy-rain">
+                </i>
+            </div>
+            <div>
+                Periodo Actual
+                @await Component.InvokeAsync("PeriodoActualComponent")
+
+            </div>
+        </div>
+
+    </div>
+</div>

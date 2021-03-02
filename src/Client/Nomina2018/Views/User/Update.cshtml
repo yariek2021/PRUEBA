@@ -1,0 +1,18 @@
+﻿@model ResponseHelper
+@{
+    ViewData["Title"] = "Información personal";
+}
+
+<h1 class="title">@ViewData["Title"]</h1>
+<h2 class="subtitle">Respuesta del servidor</h2>
+
+<div class="content">
+    @if (Model.IsSuccess)
+    {
+        <p>El usuario ha sido actualizado con éxito.</p>
+    }
+    else
+    {
+        <p>El usuario no ha sido actualizado.</p>
+    }
+</div>

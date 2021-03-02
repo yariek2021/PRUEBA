@@ -1,0 +1,19 @@
+﻿@model bool
+@{
+    ViewData["Title"] = "Creación de usuario";
+}
+
+<h1 class="title">@ViewData["Title"]</h1>
+<h2 class="subtitle">Respuesta del servidor</h2>
+
+<div class="content">
+    @if (Model)
+    {
+        <p>El usuario ha sido creado con éxito</p>
+    }
+    else
+    {
+        <p>El usuario no ha sido creado con éxito</p>
+    }
+</div>
+
